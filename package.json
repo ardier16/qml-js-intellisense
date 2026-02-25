@@ -1,0 +1,57 @@
+{
+  "name": "qml-js-intellisense",
+  "displayName": "QML JavaScript IntelliSense",
+  "description": "Enhanced IntelliSense, navigation, and code completion for JavaScript imports in QML files with JSDoc support",
+  "version": "1.0.0",
+  "publisher": "ardier16",
+  "author": {
+    "name": "ardier16"
+  },
+  "license": "MIT",
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ardier16/qml-js-intellisense"
+  },
+  "bugs": {
+    "url": "https://github.com/ardier16/qml-js-intellisense/issues"
+  },
+  "homepage": "https://github.com/ardier16/qml-js-intellisense#readme",
+  "keywords": [
+    "qml",
+    "javascript",
+    "intellisense",
+    "autocomplete",
+    "qt",
+    "jsdoc",
+    "code-completion",
+    "qml-js",
+    "qt-quick",
+    "go-to-definition",
+    "navigation"
+  ],
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters",
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:qml",
+    "onLanguage:javascript"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "qml",
+        "extensions": [".qml"]
+      }
+    ]
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0"
+  }
+}

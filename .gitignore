@@ -1,0 +1,11 @@
+node_modules/
+*.vsix
+.vscode-test/
+*.log
+.DS_Store
+.vscode/
+*.swp
+*.swo
+*~
+.env
+package-lock.json

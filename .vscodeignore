@@ -1,0 +1,17 @@
+.vscode/**
+.vscode-test/**
+node_modules/**
+.git/**
+.gitignore
+.eslintrc.json
+.prettierrc
+.editorconfig
+vsc-extension-quickstart.md
+CONTRIBUTING.md
+**/jsconfig.json
+**/*.map
+**/*.vsix
+test/**
+*.md
+!README.md
+!CHANGELOG.md
