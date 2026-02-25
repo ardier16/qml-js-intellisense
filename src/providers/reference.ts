@@ -1,17 +1,20 @@
-const vscode = require('vscode');
-const { LANGUAGE_IDS, MAX_QML_FILES_TO_SEARCH } = require('../constants');
-const { resolveJsFilePath } = require('../utils');
-const { findJavaScriptImports } = require('../parser');
+import * as vscode from 'vscode';
+import { LANGUAGE_IDS, MAX_QML_FILES_TO_SEARCH } from '../constants';
+import { resolveJsFilePath } from '../utils';
+import { findJavaScriptImports } from '../parser';
 
 /**
  * Creates a reference provider for JavaScript files
- * @returns {vscode.Disposable}
  */
-function createReferenceProvider() {
+export function createReferenceProvider(): vscode.Disposable {
     return vscode.languages.registerReferenceProvider(
         { language: LANGUAGE_IDS.QML, scheme: 'file' },
         {
-            async provideReferences(document, position, context) {
+            async provideReferences(
+                document: vscode.TextDocument,
+                position: vscode.Position,
+                _context: vscode.ReferenceContext
+            ): Promise<vscode.Location[] | undefined> {
                 // Check if we're in a JS file at a function definition
                 if (document.languageId !== LANGUAGE_IDS.JAVASCRIPT && !document.fileName.endsWith('.js')) {
                     return undefined;
@@ -30,7 +33,7 @@ function createReferenceProvider() {
                     return undefined;
                 }
                 
-                const locations = [];
+                const locations: vscode.Location[] = [];
                 
                 // Search for references in QML files
                 // Exclude build directories, node_modules, and other generated/ignored directories
@@ -87,7 +90,3 @@ function createReferenceProvider() {
         }
     );
 }
-
-module.exports = {
-    createReferenceProvider
-};

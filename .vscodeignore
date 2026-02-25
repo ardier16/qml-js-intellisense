@@ -15,3 +15,6 @@ test/**
 *.md
 !README.md
 !CHANGELOG.md
+src/**
+tsconfig.json
+**/*.ts

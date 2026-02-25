@@ -1,17 +1,19 @@
-const vscode = require('vscode');
-const { LANGUAGE_IDS } = require('../constants');
-const { safeReadFile, getPositionFromIndex } = require('../utils');
-const { extractAliasAndFunction, findJsFileForAlias } = require('../parser');
+import * as vscode from 'vscode';
+import { LANGUAGE_IDS } from '../constants';
+import { safeReadFile, getPositionFromIndex } from '../utils';
+import { extractAliasAndFunction, findJsFileForAlias } from '../parser';
 
 /**
  * Creates a definition provider for QML files
- * @returns {vscode.Disposable}
  */
-function createDefinitionProvider() {
+export function createDefinitionProvider(): vscode.Disposable {
     return vscode.languages.registerDefinitionProvider(
         { language: LANGUAGE_IDS.QML, scheme: 'file' },
         {
-            provideDefinition(document, position) {
+            provideDefinition(
+                document: vscode.TextDocument,
+                position: vscode.Position
+            ): vscode.Location | undefined {
                 const extracted = extractAliasAndFunction(document, position);
                 if (!extracted) {
                     return undefined;
@@ -47,7 +49,3 @@ function createDefinitionProvider() {
         }
     );
 }
-
-module.exports = {
-    createDefinitionProvider
-};

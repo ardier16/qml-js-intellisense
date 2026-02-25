@@ -1,21 +1,19 @@
-const vscode = require('vscode');
-const { LANGUAGE_IDS, REGEX_PATTERNS } = require('../constants');
-const { mapTypeToTS, safeReadFile } = require('../utils');
-const { 
+import * as vscode from 'vscode';
+import { LANGUAGE_IDS, REGEX_PATTERNS } from '../constants';
+import { mapTypeToTS, safeReadFile } from '../utils';
+import { 
+    FunctionInfo,
     findJsFileForAlias, 
     parseJavaScriptFunctions, 
     findMatchingJsFiles, 
     isAliasImported,
     getJsImportInsertionPoint
-} = require('../parser');
+} from '../parser';
 
 /**
  * Creates a completion item for a function
- * @param {Object} func - Function object with name, params, paramDocs, returnType, documentation
- * @param {string} alias - The import alias
- * @returns {vscode.CompletionItem}
  */
-function createFunctionCompletionItem(func, alias) {
+function createFunctionCompletionItem(func: FunctionInfo, alias: string): vscode.CompletionItem {
     const item = new vscode.CompletionItem(func.name, vscode.CompletionItemKind.Method);
     
     const returnTypeTS = mapTypeToTS(func.returnType);
@@ -27,7 +25,7 @@ function createFunctionCompletionItem(func, alias) {
     item.detail = `(${paramSignature}): ${returnTypeTS}`;
     
     // Build documentation
-    const docParts = [];
+    const docParts: string[] = [];
     if (func.returnType && func.returnType !== 'any') {
         docParts.push(`**→ Returns ${func.returnType}**\n`);
     }
@@ -57,15 +55,15 @@ function createFunctionCompletionItem(func, alias) {
 
 /**
  * Creates a completion provider for QML files
- * @param {Map} jsFileCache - Cache for parsed JS files
- * @param {vscode.ExtensionContext} context - Extension context
- * @returns {vscode.Disposable}
  */
-function createCompletionProvider(jsFileCache, context) {
+export function createCompletionProvider(
+    jsFileCache: Map<string, FunctionInfo[]>,
+    context: vscode.ExtensionContext
+): vscode.Disposable {
     return vscode.languages.registerCompletionItemProvider(
         { language: LANGUAGE_IDS.QML, scheme: 'file' },
         {
-            async provideCompletionItems(document, position) {
+            async provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
                 const linePrefix = document.lineAt(position).text.substr(0, position.character);
                 
                 // Check if we're typing after an identifier followed by a dot
@@ -167,7 +165,3 @@ function createCompletionProvider(jsFileCache, context) {
         ...Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)) // A-Z
     );
 }
-
-module.exports = {
-    createCompletionProvider
-};
