@@ -2,6 +2,14 @@
 
 All notable changes to the "QML JavaScript IntelliSense" extension will be documented in this file.
 
+## [1.1.0] - 2026-02-25
+
+### Added
+- **Auto-Import Feature**: Type a capitalized identifier (e.g., `Utils`) and get automatic import suggestions
+- Intelligent filename-to-alias conversion (e.g., `util.js` → `UtilJS`)
+- Quick Fix code actions for adding missing imports (lightbulb icon)
+- Support for up to 500 JS files in workspace for auto-import suggestions
+
 ## [1.0.0] - 2026-02-25
 
 ### Added

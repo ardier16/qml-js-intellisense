@@ -9,6 +9,7 @@ Perfect for Qt/QML developers working with JavaScript modules in their QML appli
 
 ## Features
 
+- ✅ **Auto-Import** - Type a capitalized identifier (e.g., `Utils`) and get automatic import suggestions
 - ✅ Autocomplete for JavaScript functions imported with `import "file.js" as Name`
 - ✅ Function signature hints
 - ✅ JSDoc documentation on hover
@@ -19,6 +20,25 @@ Perfect for Qt/QML developers working with JavaScript modules in their QML appli
 - ✅ **Find All References** - From JS file, find all QML usages (Shift+F12)
 
 ## Usage
+
+### Auto-Import
+
+Start typing a capitalized identifier (like `Utils`, `AccountHelper`, etc.) and the extension will automatically suggest importing matching JavaScript files:
+
+```qml
+// Start typing "Util" and you'll see import suggestions
+Util  // <-- Suggestions appear for utils.js, utility.js, etc.
+```
+
+When you select an import suggestion, it automatically adds the import statement:
+
+```qml
+import "./utils.js" as Utils  // <-- Auto-added
+
+Utils.  // <-- Now get function completions
+```
+
+### Function Completion
 
 When you import a JavaScript file in QML:
 

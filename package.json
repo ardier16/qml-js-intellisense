@@ -2,7 +2,7 @@
   "name": "qml-js-intellisense",
   "displayName": "QML JavaScript IntelliSense",
   "description": "Enhanced IntelliSense, navigation, and code completion for JavaScript imports in QML files with JSDoc support",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "publisher": "ardier16",
   "author": {
     "name": "ardier16"
@@ -42,7 +42,7 @@
     "onLanguage:qml",
     "onLanguage:javascript"
   ],
-  "main": "./extension.js",
+  "main": "./src/extension.js",
   "contributes": {
     "languages": [
       {
